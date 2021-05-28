@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\VarDumper\VarDumper;
+use app\Http\Controllers\ContatoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,18 +14,11 @@ use Symfony\Component\VarDumper\VarDumper;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+ 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/contato/{id?}', function ($id = null) {
-    return "contato id=$id";
-});
-Route::post('/teste', function () {
-    dd($_POST);
-    return "contato POST";
-});
-Route::put('/edit',function()
-{
-    return "Edição";
-});
+Route::get('/contato/{id?}', ['uses' => 'ContatoController@index']);
+Route::post('/contato',['uses'=>'ContatoController@criar']);
+Route::put('/contato',['uses'=>'ContatoController@editar']);
+

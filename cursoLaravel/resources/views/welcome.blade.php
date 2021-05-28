@@ -515,7 +515,7 @@
             </div>
             <div>
                 <h2>Teste</h2>
-                <form action="/teste" method="post">
+                <form action="/contato" method="post">
                     {{csrf_field()}}
                     <input type="text" name="nome" id="" placeholder="Nome....">
                     <button>Enviar</button>
@@ -523,7 +523,7 @@
             </div>
             <div>
                 <h2>Teste</h2>
-                <form action="/edit" method="post">
+                <form action="/contato" method="post">
                     {{csrf_field()}}
                     <input type="hidden" name="_method" id="" placeholder="Nome.... " value="put">
                     <input type="text" name="nome" placeholder="Nome... Put">
