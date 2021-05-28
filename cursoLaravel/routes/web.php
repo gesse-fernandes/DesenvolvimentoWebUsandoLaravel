@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\VarDumper\VarDumper;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/contato/{id?}', function ($id = null) {
+    return "contato id=$id";
+});
+Route::post('/teste', function () {
+    dd($_POST);
+    return "contato POST";
+});
+Route::put('/edit',function()
+{
+    return "Edição";
 });
