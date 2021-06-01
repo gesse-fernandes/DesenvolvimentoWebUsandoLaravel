@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Curso;
+
 class CursoController extends Controller
 {
     public function index()
     {
         $registros = Curso::all();
-        return view('admin.cursos.index',compact('registros'));
+        return view('admin.cursos.index', compact('registros'));
     }
 
     public function adicionar()
@@ -21,25 +22,22 @@ class CursoController extends Controller
     public function salvar(Request $input)
     {
         $dados = $input->all();
-      
-        if(isset($dados['publicado']))
-        {
+
+        if (isset($dados['publicado'])) {
             $dados['publicado'] = 'sim';
-        }else{
+        } else {
             $dados['publicado'] = 'nao';
         }
-        if($input->hasFile('imagem'))
-        {
+        if ($input->hasFile('imagem')) {
             $imagem = $input->file('imagem');
-            $num = rand(1111,9999);
+            $num = rand(1111, 9999);
             $dir = "img/cursos/";
             $ex = $imagem->guessClientExtension();
-            $nomeImg = "imagem_".$num . "." .$ex;
+            $nomeImg = "imagem_" . $num . "." . $ex;
             $imagem->move($dir, $nomeImg);
-            $dados['imagem'] = $dir . '/'. $nomeImg;
-
+            $dados['imagem'] = $dir . '/' . $nomeImg;
         }
-    
+
         Curso::create($dados);
 
         return redirect()->route('admin.cursos');
@@ -48,10 +46,10 @@ class CursoController extends Controller
     public function editar($id)
     {
         $registro = Curso::find($id);
-        return view('admin.cursos.editar',compact('registro'));
+        return view('admin.cursos.editar', compact('registro'));
     }
 
-    public function atualizar(Request $input,$id)
+    public function atualizar(Request $input, $id)
     {
         $dados = $input->all();
 
@@ -74,5 +72,10 @@ class CursoController extends Controller
 
         return redirect()->route('admin.cursos');
     }
-    
+
+    public function deletar($id)
+    {
+        Curso::find($id)->delete();
+        return redirect()->route('admin.cursos');
+    }
 }

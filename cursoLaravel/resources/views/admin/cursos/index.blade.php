@@ -21,7 +21,7 @@
                             <td>{{ $registro->id }}</td>
                             <td>{{ $registro->nome }}</td>
                             <td>{{ $registro->descricao }}</td>
-                            <td><img src="{{ asset($registro->imagem) }}" alt="{{ $registro->nome }}" width="120"></td>
+                            <td><img src="{{ asset($registro->imagem) }}" alt="{{ $registro->nome }}" height="60"></td>
                             <td>{{ $registro->publicado }}</td>
                             <td>
                                 <a class="btn deep-orange"
