@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\Cast\Object_;
+use App\Models\Contato;
 
 class ContatoController extends Controller
 {
@@ -15,6 +15,10 @@ class ContatoController extends Controller
             (object)['nome' => 'day', 'telefone' => '88994255312'],
             (object)  ['nome'=> 'gesse','telefone'=>'88994255312'],
         ];
+        $contato = new Contato();
+        //dd($contato->lista()); 
+        $con = $contato->lista();
+        dd($con->nome);
         return view('contato.index',compact('contatos'));
 
     }
