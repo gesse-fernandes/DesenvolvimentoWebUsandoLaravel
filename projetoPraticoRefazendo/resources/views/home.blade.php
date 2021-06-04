@@ -4,23 +4,32 @@
 
 @section('conteudo')
   <div class="container">
-    <h1 class="text-center">Lista de Produtos</h1>
+    @if ($produtos->count() == 0)
+         <h1 class="text-center">Nenhuma informação a ser exibida pois não existe nenhum cadastro cadastre um produto!!
+            </h1>
+    @else
+        <h1 class="text-center">Lista de Produtos</h1>
     
     <div class="row">
-        <div class="col-lg-4 mb-3">
+      @foreach ($produtos as $produto)
+            <div class="col-lg-4 mb-3">
             <div class="card">
                 <div class="card-image">
-                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="">
+                <img src="{{asset($produto->imagem)}}" width="150" height="150">
                     </div>
             <div class="card-body">
-                <h4>teste</h4>
-                <p>descrição</p>
-                <p>preço</p>
+                <h4>{{$produto->nome}}</h4>
+                <p>{{$produto->descricao}}</p>
+                <p>{{$produto->valor}}</p>
             </div>
              </div>
 
         </div>
-    </div>
+      @endforeach
+      
+    </div> 
+    @endif
+   
 
 
   </div>

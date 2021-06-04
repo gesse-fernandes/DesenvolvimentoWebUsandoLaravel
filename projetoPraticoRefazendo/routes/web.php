@@ -21,3 +21,11 @@ Route::post('/login/entrar',['as'=>'site.login.entrar','uses'=>'Site\LoginContro
 Route::get('/login/cadastrar',['as'=>'site.login.cadastrar','uses'=> 'Site\UsuarioController@index']);
 
 Route::post('/login/adicionar',['as'=>'site.login.adicionar','uses'=>'Site\UsuarioController@adicionar']);
+Route::get('/login/sair', ['as' => 'site.login.sair', 'uses' => 'Site\LoginController@sair']);
+Route::group(['middleware' => 'auth'],function(){
+    Route::get('/admin/produtos',['as'=>'admin.produtos','uses'=>'Admin\ProdutoController@index']);
+    Route::get('/admin/produtos/adicionar',['as'=>'admin.produtos.adicionar','uses'=>'Admin\ProdutoController@adicionar']);
+    Route::post('admin/produtos/salvar',['as'=>'admin.produtos.salvar','uses'=>'Admin\ProdutoController@salvar']);
+
+    Route::get('admin/produtos/editar/{id}',['as'=>'admin.produtos.editar','uses'=>'Admin\ProdutoController@editar']);
+});

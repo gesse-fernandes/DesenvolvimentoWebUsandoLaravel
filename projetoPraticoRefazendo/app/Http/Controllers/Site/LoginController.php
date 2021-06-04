@@ -18,10 +18,16 @@ class LoginController extends Controller
     {
         $dados = $input->all();
         //dd($dados);
-        if(Auth::attempt(['login' => $dados['login'], 'password' => $dados['senha']])){
-            return redirect()->route('');
+        if (Auth::attempt(['email' => $dados['login'], 'password' => $dados['senha']])) {
+            return redirect()->route('admin.produtos');
         }
         return redirect()->route('site.login');
 
+    }
+
+    public function sair()
+    {
+        Auth::logout();
+        return redirect()->route('site.home');
     }
 }
