@@ -28,6 +28,9 @@
             <form class="mt-5" method="POST" action="{{ route('site.login.adicionar') }}" >
                  {{ csrf_field() }}
                 @include('login.form')
+                <div class="d-flex justify-content-end">
+                    <input type="submit" name="acao" class="btn btn-success" value="Cadastrar">
+                </div>
             </form>
         </div>
     </section>

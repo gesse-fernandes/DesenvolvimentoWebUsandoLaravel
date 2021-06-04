@@ -44,7 +44,7 @@
                             <a class="nav-link" href="{{route('admin.produtos')}}">Exibir Produtos</a>
                         </li>
                         <li><a href="{{route('admin.produtos.adicionar')}}" class="nav-link">Produtos</a></li>
-                        <li><a href="#" class="nav-link">{{ Auth::user()->name }}</a></li>
+                        <li><a href="{{route('login.editar',Auth::user()->id)}}" class="nav-link">{{ Auth::user()->name }}</a></li>
                         <li><a href="{{ route('site.login.sair') }}" class="nav-link">Sair</a></li>
                           <form class="form-inline my-2 my-lg-0" action="{{route('admin.produtos.pesquisar')}}" method="POST">
                               {{ csrf_field() }}

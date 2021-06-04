@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',['as'=>'site.home','uses'=>'Site\HomeController@index']);
-Route::post('/pesquisar', ['as' => 'site.pesquisar', 'uses' => 'Site\HomeController@pesquisar']);
+Route::post('/', ['as' => 'site.pesquisar', 'uses' => 'Site\HomeController@pesquisar']);
 Route::get('/login',['as'=> 'site.login', 'uses'=>'Site\LoginController@index']);
 Route::post('/login/entrar',['as'=>'site.login.entrar','uses'=>'Site\LoginController@entrar']);
 
@@ -32,4 +32,8 @@ Route::group(['middleware' => 'auth'],function(){
     Route::put('admin/produtos/atualizar/{id}',['as'=>'admin.produtos.atualizar','uses'=>'Admin\ProdutoController@atualizar']);
     Route::get('admin/produtos/deletar/{id}',['as'=>'admin.produtos.deletar','uses'=>'Admin\ProdutoController@deletar']);
     Route::post('admin/produtos/pesquisar',['as'=>'admin.produtos.pesquisar', 'uses'=>'Admin\ProdutoController@pesquisar']);
+
+    Route::get('login/editar/{id}', ['as' => 'login.editar', 'uses' => 'Site\UsuarioController@editar']);
+
+    Route::put('login/usuario/atualizar/{id}', ['as' => 'login.usuario.atualizar', 'uses' => 'Site\UsuarioController@atualizar']);
 });

@@ -1,11 +1,11 @@
  <div class="form-group">
                     <label for="nome">Nome</label>
-                    <input type="text" class="form-control" id="nome" name="nome" aria-describedby="email" value="{{isset($usuario->nome)}}" placeholder="nome..">
+                    <input type="text" class="form-control" id="nome" name="nome" aria-describedby="email" value="{{isset($usuario->name)?$usuario->name:''}}" placeholder="nome..">
 
                 </div>
                 <div class="form-group">
                     <label for="login">Nome do login</label>
-                    <input type="text" class="form-control" value="{{isset($usuario->email)}}" name="email" id="t" placeholder="email do login">
+                    <input type="text" class="form-control" value="{{isset($usuario->email)? $usuario->email:''}}" name="email" id="t" placeholder="email do login">
                 </div>
                 <div class="form-group">
                     <label for="senha">Senha</label>
@@ -15,6 +15,4 @@
                      <a href="/" class="btn btn-danger">Cancelar</a>
                 </div>
                 <br>
-                <div class="d-flex justify-content-end">
-                    <input type="submit" name="acao" class="btn btn-success" value="Cadastrar">
-                </div>
+                

@@ -71,27 +71,33 @@ class ProdutoController extends Controller
     {
         $dados = $input->all();
         $resposta = $dados['pesquisar'];
-        
-        $pesquisado = Produto::query()
-        ->where('nome','LIKE',"%{$resposta}%")
-        ->get();
-        if($pesquisado->count() > 0)
+        if($resposta == '')
         {
-            $retorno = $pesquisado[0]->attributes;
-           
-           $retornado = [
-                (object) ['nome'=>$retorno['nome'],
-               'descricao'=>$retorno['descricao'],
-               'imagem'=>$retorno['imagem'],
-               'valor'=>$retorno['valor'],
-               'id'=> $retorno['id'],
-                ]
-           ];
-           
-            return view('admin.produtos.index', compact('retornado'));
-        }else{
             return redirect()->route('admin.produtos');
+
+        }else{
+            $pesquisado = Produto::query()
+            ->where('nome', 'LIKE', "%{$resposta}%")
+            ->get();
+            if ($pesquisado->count() > 0) {
+                $retorno = $pesquisado[0]->attributes;
+
+                $retornado = [
+                    (object) [
+                        'nome' => $retorno['nome'],
+                        'descricao' => $retorno['descricao'],
+                        'imagem' => $retorno['imagem'],
+                        'valor' => $retorno['valor'],
+                        'id' => $retorno['id'],
+                    ]
+                ];
+
+                return view('admin.produtos.index', compact('retornado'));
+            } else {
+                return redirect()->route('admin.produtos');
+            }
         }
+        
 
     }
 
