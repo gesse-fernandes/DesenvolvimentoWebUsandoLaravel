@@ -6,7 +6,7 @@
 @section('conteudo')
     <div class="container ">
         @if (isset($retornado))
-            @if (empty($retornando) == 0)
+            @if (empty($retornado) != 0)
             <h1 class="text-center">Nenhuma informação a ser exibida pois não existe nenhum cadastro cadastre um produto!!
             </h1>
 

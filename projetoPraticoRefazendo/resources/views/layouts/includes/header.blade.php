@@ -32,7 +32,8 @@
                             <a class="nav-link" href="{{route('site.home')}}">Exibir Produtos</a>
                         </li>
                         <a class="nav-link" href="{{ route('site.login') }}">Login</a>
-                          <form class="form-inline my-2 my-lg-0" action="" method="POST">
+                          <form class="form-inline my-2 my-lg-0" action="{{route('site.pesquisar')}}" method="POST">
+                            {{ csrf_field() }}
                     <input class="form-control mr-sm-2" name="pesquisar" type="search" placeholder="Pesquisar"
                         aria-label="Pesquisar">
                     <button class="btn btn-success my-2 my-sm-0" " type=" submit">Pesquisar</button>
