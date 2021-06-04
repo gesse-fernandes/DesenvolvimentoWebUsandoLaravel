@@ -4,10 +4,12 @@
     @section('conteudo')
     <div class="container">
         <h3 class="text-center">Editar Produto</h3>
-        <form action="" enctype="multipart/form-data" method="post">
+        <form action="{{route('admin.produtos.atualizar',$produtos->id)}}" enctype="multipart/form-data" method="post">
             {{ csrf_field() }}
+              <input type="hidden" name="_method" value="put">
             @include('admin.produtos.form')
-            <button class="btn btn-primary">Editar</button>
+            <br>
+            <button class="btn btn-primary">Atualizar</button>
         </form>
     </div>
 @endsection

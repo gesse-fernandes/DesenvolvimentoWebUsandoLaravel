@@ -10,4 +10,7 @@ class Produto extends Model
     public $fillable = [
         'nome','descricao','imagem','valor'
     ];
+    public $attributes =[
+
+    ];
 }

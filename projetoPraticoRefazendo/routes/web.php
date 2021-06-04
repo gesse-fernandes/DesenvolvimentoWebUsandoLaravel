@@ -28,4 +28,8 @@ Route::group(['middleware' => 'auth'],function(){
     Route::post('admin/produtos/salvar',['as'=>'admin.produtos.salvar','uses'=>'Admin\ProdutoController@salvar']);
 
     Route::get('admin/produtos/editar/{id}',['as'=>'admin.produtos.editar','uses'=>'Admin\ProdutoController@editar']);
+
+    Route::put('admin/produtos/atualizar/{id}',['as'=>'admin.produtos.atualizar','uses'=>'Admin\ProdutoController@atualizar']);
+    Route::get('admin/produtos/deletar/{id}',['as'=>'admin.produtos.deletar','uses'=>'Admin\ProdutoController@deletar']);
+    Route::post('admin/produtos/pesquisar',['as'=>'admin.produtos.pesquisar', 'uses'=>'Admin\ProdutoController@pesquisar']);
 });

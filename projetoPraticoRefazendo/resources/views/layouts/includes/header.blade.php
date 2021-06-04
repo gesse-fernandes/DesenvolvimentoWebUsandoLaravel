@@ -32,6 +32,11 @@
                             <a class="nav-link" href="{{route('site.home')}}">Exibir Produtos</a>
                         </li>
                         <a class="nav-link" href="{{ route('site.login') }}">Login</a>
+                          <form class="form-inline my-2 my-lg-0" action="" method="POST">
+                    <input class="form-control mr-sm-2" name="pesquisar" type="search" placeholder="Pesquisar"
+                        aria-label="Pesquisar">
+                    <button class="btn btn-success my-2 my-sm-0" " type=" submit">Pesquisar</button>
+                </form>
 
                     @else
                         <li class="nav-item active">
@@ -40,15 +45,15 @@
                         <li><a href="{{route('admin.produtos.adicionar')}}" class="nav-link">Produtos</a></li>
                         <li><a href="#" class="nav-link">{{ Auth::user()->name }}</a></li>
                         <li><a href="{{ route('site.login.sair') }}" class="nav-link">Sair</a></li>
-                    @endif
-
-
-                </ul>
-                <form class="form-inline my-2 my-lg-0" method="POST">
+                          <form class="form-inline my-2 my-lg-0" action="{{route('admin.produtos.pesquisar')}}" method="POST">
+                              {{ csrf_field() }}
                     <input class="form-control mr-sm-2" name="pesquisar" type="search" placeholder="Pesquisar"
                         aria-label="Pesquisar">
                     <button class="btn btn-success my-2 my-sm-0" " type=" submit">Pesquisar</button>
                 </form>
+                    @endif
+                </ul>
+              
             </div>
         </div>
     </nav>
