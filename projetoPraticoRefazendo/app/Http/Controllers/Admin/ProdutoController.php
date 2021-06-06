@@ -9,10 +9,46 @@ use PhpParser\Node\Expr\Cast\Object_;
 
 class ProdutoController extends Controller
 {
+    private $array = ['error'=>'','result'=>[]];
     public function index()
     {
         $produtos = Produto::all();
         return view('admin.produtos.index',compact('produtos'));
+    }
+
+    public function all()
+    {
+        $produto = Produto::all();
+        foreach($produto as $item)
+        {
+            $this->array['result'][] = [
+                'id'=> $item->id,
+                'nome'=> $item->nome,
+                'descricao'=> $item->descricao,
+                'imagem'=> $item->imagem,
+                'valor'=>$item->valor,
+            ];
+        }
+        
+        return $this->array;
+    }
+
+    public function cadastrarViaApi(Request $input)
+    {
+        $dados = $input->all();
+
+        if ($input->hasFile('imagem')) {
+            $imagem = $input->file('imagem');
+            $num = rand(1111, 9999);
+            $dir = "img/produtos/";
+            $ex = $imagem->guessClientExtension();
+            $nomeImg = "imagem_" . $num . "." . $ex;
+            $imagem->move($dir, $nomeImg);
+            $dados['imagem'] = $dir . '/' . $nomeImg;
+        }
+
+        Produto::create($dados);
+        return redirect()->route('admin.produtos');
     }
 
     public function adicionar()

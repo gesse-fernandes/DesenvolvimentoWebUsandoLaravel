@@ -1,7 +1,5 @@
 @extends('layouts.site')
-
 @section('titulo','Home')
-
 @section('conteudo')
   <div class="container">
     @if (isset($retornado))

@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/ping',function(Request $input){
+    return ['pong'=> true];
+});
+Route::get('/teste','Admin\ProdutoController@all');
+
+Route::post('/testando','Admin\ProdutoController@cadastrarViaApi');
+
