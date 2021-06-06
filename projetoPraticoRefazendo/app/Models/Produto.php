@@ -13,4 +13,16 @@ class Produto extends Model
     public $attributes =[
 
     ];
+
+    public static $rules =[
+           'nome'=>'required',
+           'descricao'=>'required',
+           'imagem'=>'required',
+           'valor'=>'required',
+    ];
+    public static $messages =
+    [
+        'nome.required'=>'Nome Obrigatório',
+        'descricao.required'=>'Campo Descrição Obrigatório'
+    ];
 }

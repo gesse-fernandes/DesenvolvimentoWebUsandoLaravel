@@ -18,6 +18,12 @@ class HomeController extends Controller
     {
         $dados = $input->all();
         $resposta = $dados['pesquisar'];
+        $messages = [
+            'pesquisar.required'=>'so teste'
+        ];
+        $this->validate($input,[
+            'pesquisar'=>'required',
+        ],$messages);
         if($resposta == '')
         {
            $produtos = Produto::all(); 

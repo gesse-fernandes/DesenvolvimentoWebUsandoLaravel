@@ -23,5 +23,5 @@ Route::get('/ping',function(Request $input){
 });
 Route::get('/teste','Admin\ProdutoController@all');
 
-Route::post('/testando','Admin\ProdutoController@cadastrarViaApi');
+//Route::post('/testando','Admin\ProdutoController@cadastrarViaApi');
 

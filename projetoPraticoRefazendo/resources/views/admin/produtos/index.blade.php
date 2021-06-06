@@ -84,7 +84,9 @@
                                 <td>{{ $produto->valor }}</td>
                                 <td>
                                     <a href="{{route('admin.produtos.editar',$produto->id)}}" class="btn btn-success">Editar</a>
-                                    <a href="{{route('admin.produtos.deletar',$produto->id)}}" class="btn btn-danger">Deletar</a>
+                                </td>
+                                <td>
+                                    <a href="{{route('admin.produtos.deletar',$produto->id)}}" onclick=" return confirm('Tem Certeza que deseja deletar?')" class="btn btn-danger">Deletar</a>
                                 </td>
                             </tr>
                         @endforeach

@@ -32,7 +32,7 @@ class ProdutoController extends Controller
         
         return $this->array;
     }
-
+/*
     public function cadastrarViaApi(Request $input)
     {
         $dados = $input->all();
@@ -46,10 +46,18 @@ class ProdutoController extends Controller
             $imagem->move($dir, $nomeImg);
             $dados['imagem'] = $dir . '/' . $nomeImg;
         }
+        $messages = [
+            'nome.required'=>'Campo nome Obrigatório',
+            'descricao.required'=>'Campo Descricao Obrigatório'
+        ];
+        $this->validate($input,[
+            'nome'=>'required',
+            'descricao'=>'required',
+        ],$messages);
 
         Produto::create($dados);
         return redirect()->route('admin.produtos');
-    }
+    }*/
 
     public function adicionar()
     {
@@ -69,6 +77,20 @@ class ProdutoController extends Controller
             $imagem->move($dir, $nomeImg);
             $dados['imagem'] = $dir . '/' . $nomeImg;
         }
+        $messages =
+        [
+            'nome.required'=>'Campo Nome Obrigatório',
+            'descricao.required'=>'Campo Descrição Obrigatório',
+            'valor.required'=>'Campo Valor Obrigatório',
+            'imagem.required'=>'Campo da Imagem Obrigatório',
+
+        ];
+        $this->validate($input,[
+            'nome'=>'required',
+            'descricao'=>'required',
+            'valor'=>'required',
+            'imagem'=>'required',
+        ],$messages);
        
         Produto::create($dados);
         return redirect()->route('admin.produtos');
@@ -93,6 +115,19 @@ class ProdutoController extends Controller
             $imagem->move($dir, $nomeImg);
             $dados['imagem'] = $dir . '/' . $nomeImg;
         }
+        $messages =
+        [
+            'nome.required' => 'Campo Nome Obrigatório',
+            'descricao.required' => 'Campo Descrição Obrigatório',
+            'valor.required' => 'Campo Valor Obrigatório',
+
+        ];
+        $this->validate($input, [
+            'nome' => 'required',
+            'descricao' => 'required',
+            'valor' => 'required',
+           
+        ], $messages);
 
         Produto::find($id)->update($dados);
         return redirect()->route('admin.produtos');
@@ -107,6 +142,12 @@ class ProdutoController extends Controller
     {
         $dados = $input->all();
         $resposta = $dados['pesquisar'];
+        $messages = [
+            'pesquisar.required'=>'so teste',
+        ];
+        $this->validate($input,[
+            'pesquisar'=>'required',
+        ],$messages);
         if($resposta == '')
         {
             return redirect()->route('admin.produtos');

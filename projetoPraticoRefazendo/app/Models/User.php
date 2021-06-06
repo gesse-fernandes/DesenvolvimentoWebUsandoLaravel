@@ -22,6 +22,16 @@ class User extends Authenticatable
         'password',
     ];
 
+    public static $rules = 
+    [
+        'name'=>'required',
+        'email'=>'required',
+        'password'=>'required'
+    ];
+    public static $messages =
+    [
+    ];
+
     /**
      * The attributes that should be hidden for arrays.
      *
