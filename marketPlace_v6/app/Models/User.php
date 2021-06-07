@@ -41,4 +41,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         //'name'=>'string',
     ];
+    public function store()
+    {
+        return $this->hasOne(Store::class);
+    }
+
+    
 }
