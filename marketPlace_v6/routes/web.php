@@ -40,13 +40,78 @@ Route::get('/model',function(){
     'password'=>bcrypt('123'),
  ]);*/
     //dd($user);
-    $user = \App\Models\User::find(43);
+    /*$user = \App\Models\User::find(43);
     $user->update([
         'name'=>'e rapaz',
         
+    ]);*/
+    //$user = \App\Models\User::find(4);
+    //$loja = \App\Models\Store::find(1);
+
+    //dd($user->store()->count());
+    //dd($loja->products());
+    //return $loja->products;
+
+    /*$user = \App\Models\User::find(10);
+    $store = $user->store()->create(
+        [
+            'name'=>'Loja teste',
+            'description'=>'Loja teste de gessex',
+            'mobile_phone'=>'xx-xxxxx',
+            'phone'=>'xx-xxxxx',
+            'slug'=>'loja-teste',
+        ]);
+        dd($store);*/
+
+    /*$a = User::create([
+        'name' => 'a',
+        'email' => 'b',
+        'email_verified_at' => now(),
+        'password' => bcrypt('123'),
+        'remember_token' => Str::random(10),
+        ]);
+    dd($a);*/
+    /*$user = \App\Models\User::find(41);
+      $store=$user->store()->create(
+            [
+                'name' => 'Loja teste',
+                'description' => 'Loja teste de gessex',
+                'mobile_phone' => 'xx-xxxxx',
+                'phone' => 'xx-xxxxx',
+                'slug' => 'loja-teste',
+            ]
+        );*/
+        /*$store = \App\Models\Store::find(42);
+       $prod =  $store->products()->create([
+            'name'=>'test',
+            'description'=>'ok',
+            'body'=>'bode',
+            'price'=>10.20,
+            'slug'=>'test-ok',
+        ]);*/
+        //dd($prod);
+        //dd($store);
+        /* \App\Models\Category::create([
+            'name'=>'Games',
+            'description'=>null,
+            'slug'=>'games',
+        ]);
+    \App\Models\Category::create([
+        'name' => 'node',
+        'description' => null,
+        'slug' => 'kkk',
     ]);
-  //  dd($user);
- return \App\Models\User::all();
+    return \App\Models\Category::all();*/
+    $prod = \App\Models\Product::find(57);
+
+  // dd($prod->categories()->attach([1]));
+ // dd($prod->categories()->detach([1]));
+    //dd($prod->categories()->sync([2]));
+    return $prod->categories;
 });
+
+Route::get('/admin/stores','Admin\\StoreController@index');
+
+
 
 
