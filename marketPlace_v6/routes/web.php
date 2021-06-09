@@ -18,11 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/model',function(){
+Route::get('/model', function () {
     //$products = \App\Models\Product::all();
     // return $products;
     //$user = new \App\Models\User();
@@ -81,7 +81,7 @@ Route::get('/model',function(){
                 'slug' => 'loja-teste',
             ]
         );*/
-        /*$store = \App\Models\Store::find(42);
+    /*$store = \App\Models\Store::find(42);
        $prod =  $store->products()->create([
             'name'=>'test',
             'description'=>'ok',
@@ -89,9 +89,9 @@ Route::get('/model',function(){
             'price'=>10.20,
             'slug'=>'test-ok',
         ]);*/
-        //dd($prod);
-        //dd($store);
-        /* \App\Models\Category::create([
+    //dd($prod);
+    //dd($store);
+    /* \App\Models\Category::create([
             'name'=>'Games',
             'description'=>null,
             'slug'=>'games',
@@ -104,14 +104,25 @@ Route::get('/model',function(){
     return \App\Models\Category::all();*/
     $prod = \App\Models\Product::find(57);
 
-  // dd($prod->categories()->attach([1]));
- // dd($prod->categories()->detach([1]));
+    // dd($prod->categories()->attach([1]));
+    // dd($prod->categories()->detach([1]));
     //dd($prod->categories()->sync([2]));
     return $prod->categories;
 });
 
-Route::get('/admin/stores','Admin\\StoreController@index');
+Route::get('/admin/stores', 'Admin\\StoreController@index');
+Route::get('/admin/stores/create', 'Admin\\StoreController@create');
+Route::post('/admin/stores/store', 'Admin\\StoreController@store');
+Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
+    Route::prefix('stores')->name('stores.')->group(function () {
+        Route::get('/', 'StoreController@index')->name('index');
+        Route::get('/create', 'StoreController@create')->name('create');
+        Route::post('/store', 'StoreController@store')->name('store');
+        Route::get('/{store}/edit', 'StoreController@edit')->name('edit');
+        Route::post('/update/{store}', 'StoreController@update')->name('update');
+        Route::get('/destroy/{store}', 'StoreController@destroy')->name('destroy');
 
 
-
-
+    });
+    Route::resource('products', 'ProductsController');
+});
