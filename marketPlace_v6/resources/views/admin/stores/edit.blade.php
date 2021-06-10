@@ -1,8 +1,9 @@
 @extends('layouts.app')
 @section('content')
-<h1>Criar Loja</h1>
+<h1>Editar Loja</h1>
 <form action="{{route('admin.stores.update',['store'=>$store->id])}}" method="post">
     {{ csrf_field() }}
+    @method("PUT");
     <div class="form-group">
     <label for="">Nome da Loja</label>
     <br>
@@ -31,8 +32,8 @@
 
 <br>
 <div>
-    <button type="submit" class="btn btn-lg btn-success">Atualizar Loja</button>
+    <button type="submit" class="btn btn-lg btn-success">Atualizar Produto</button>
 </div>
 </form>
-    
+
 @endsection

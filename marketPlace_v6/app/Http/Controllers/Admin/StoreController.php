@@ -48,7 +48,7 @@ class StoreController extends Controller
     {
         $store = \App\Models\Store::find($store);
         $store->delete();
-        flash('Loja Deletada com sucesso')->danger();
+        flash('Loja Deletada com sucesso')->success();
         return redirect()->route('admin.stores.index');
     }
 

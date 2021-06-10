@@ -43,7 +43,7 @@ Route::get('/model', function () {
     /*$user = \App\Models\User::find(43);
     $user->update([
         'name'=>'e rapaz',
-        
+
     ]);*/
     //$user = \App\Models\User::find(4);
     //$loja = \App\Models\Store::find(1);
@@ -114,7 +114,7 @@ Route::get('/admin/stores', 'Admin\\StoreController@index');
 Route::get('/admin/stores/create', 'Admin\\StoreController@create');
 Route::post('/admin/stores/store', 'Admin\\StoreController@store');
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
-    Route::prefix('stores')->name('stores.')->group(function () {
+    /*Route::prefix('stores')->name('stores.')->group(function () {
         Route::get('/', 'StoreController@index')->name('index');
         Route::get('/create', 'StoreController@create')->name('create');
         Route::post('/store', 'StoreController@store')->name('store');
@@ -123,6 +123,7 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
         Route::get('/destroy/{store}', 'StoreController@destroy')->name('destroy');
 
 
-    });
+    });*/
     Route::resource('products', 'ProductsController');
+    Route::resource('stores','StoreController');
 });
