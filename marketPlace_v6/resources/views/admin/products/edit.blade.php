@@ -3,7 +3,7 @@
 <h1>Atualizar Produtos</h1>
 <form action="{{route('admin.products.update',['product'=>$product->id])}}" method="post">
     {{ csrf_field() }}
-    @method("PUT");
+    @method("PUT")
     <div class="form-group">
     <label for="">Nome do Produto</label>
     <br>

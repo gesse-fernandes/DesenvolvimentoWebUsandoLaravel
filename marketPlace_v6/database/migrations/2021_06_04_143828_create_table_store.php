@@ -21,7 +21,7 @@ class CreateTableStore extends Migration
             $table->string('phone');
             $table->string('mobile_phone');
             $table->string('slug');
-            
+
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');//definir chave estrangeira top oh gostei

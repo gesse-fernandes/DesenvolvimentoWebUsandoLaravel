@@ -11,7 +11,11 @@ class Product extends Model
     protected $fillable = [
         'name','description','body','price','slug'
     ];
-    
+  /*  protected $casts =
+    [
+      'price'=> 'integer'
+    ];*/
+
     public function store()
     {
         return $this->belongsTo(Store::class);
@@ -21,4 +25,20 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public static $rules =
+    [
+        'name' => 'required',
+        'description' => 'required',
+        'body' => 'required',
+        'price' => 'required'
+    ];
+
+    public static $messages =
+    [
+        'name.required'=>'Nome do produto Obrigatório',
+        'description.required'=>'Descrição Obrigatório',
+        'body.required'=>'Campo Obrigatório',
+        'price.required'=>'Preço Obrigatório',
+    ];
 }

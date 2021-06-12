@@ -6,27 +6,49 @@
     <div class="form-group">
     <label for="">Nome da Loja</label>
     <br>
-    <input type="text" class="form-control" name="name">
+    <input type="text" class="form-control {{$errors->has('name')? 'is-invalid':''}}" name="name" value = "{{old('name')}}">
+
+        @if ($errors->has('name'))
+        <div class="invalid-feedback">
+            {{$errors->first('name')}}
+         </div>
+        @endif
+
 </div>
 <div class="form-group">
     <label for="">Descrição</label>
     <br>
-    <input type="text" class="form-control" name="description">
+    <input type="text" class="form-control {{$errors->has('description')? 'is-invalid':''}}" name="description" value = "{{old('description')}}">
+    @if ($errors->has('description'))
+        <div class="invalid-feedback">
+            {{$errors->first('description')}}
+         </div>
+        @endif
 </div>
 <div class="form-group">
     <label for="">Telefone</label>
     <br>
-    <input type="text"class="form-control" name="phone">
+    <input type="text"class="form-control {{$errors->has('phone')? 'is-invalid':''}}" name="phone" value = "{{old('phone')}}">
+     @if ($errors->has('phone'))
+        <div class="invalid-feedback">
+            {{$errors->first('phone')}}
+         </div>
+        @endif
 </div >
 <div class="form-group">
     <label for="">Celular/Whatzap</label>
     <br>
-    <input type="text" name="mobile_phone" class="form-control">
+    <input type="text" name="mobile_phone" class="form-control {{$errors->has('mobile_phone')? 'is-invalid':''}}" value = "{{old('mobile_phone')}}">
+     @if ($errors->has('mobile_phone'))
+        <div class="invalid-feedback">
+            {{$errors->first('mobile_phone')}}
+         </div>
+        @endif
 </div>
 <div class="form-group">
     <label for="">Slug</label>
     <br>
-    <input type="text" name="slug" class="form-control">
+    <input type="text" name="slug" class="form-control" value = "{{old('slug')}}" >
 </div>
 <br>
 <div>
