@@ -21,9 +21,8 @@ class StoreController extends Controller
     public function store(Request $input)
     {
         $dados = $input->all();
-        $user = \App\Models\User::find($dados['user']);
-        //dd($dados);
-
+        auth()->user();
+        $user =auth()->user();
         $stores=$user->store()->create($dados);
         flash('Loja Criada com sucesso')->success();
         return redirect()->route('admin.stores.index');

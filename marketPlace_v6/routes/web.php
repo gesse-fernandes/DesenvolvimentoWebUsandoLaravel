@@ -16,11 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-//Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+})->name('home');
 
 Route::get('/model', function () {
     //$products = \App\Models\Product::all();
@@ -110,11 +106,10 @@ Route::get('/model', function () {
     return $prod->categories;
 });
 
-Route::get('/admin/stores', 'Admin\\StoreController@index');
-Route::get('/admin/stores/create', 'Admin\\StoreController@create');
-Route::post('/admin/stores/store', 'Admin\\StoreController@store');
-Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
-    /*Route::prefix('stores')->name('stores.')->group(function () {
+
+Route::group(['middleware'=>['auth']],function(){
+    Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
+        /*Route::prefix('stores')->name('stores.')->group(function () {
         Route::get('/', 'StoreController@index')->name('index');
         Route::get('/create', 'StoreController@create')->name('create');
         Route::post('/store', 'StoreController@store')->name('store');
@@ -124,6 +119,26 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
 
 
     });*/
-    Route::resource('products', 'ProductsController');
-    Route::resource('stores','StoreController');
+        Route::resource('products', 'ProductsController');
+        Route::resource('stores', 'StoreController');
+    });
 });
+
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//https://staticbv.am4.com.br/publicacoes/310/p_1.jpg
+/*$url = 'https://staticbv.am4.com.br/publicacoes/1142/p_';
+$img = "img";
+$urlArray = array();
+$imgArray = array();
+for($i = 1016; $i <=1178; $i++){
+
+    $urlArray[$i] = $url . $i . '.jpg';
+
+    $imgArray[$i] =  $i . '.jpg';
+
+    file_put_contents($imgArray[$i],file_get_contents($urlArray[$i]));
+
+}*/
