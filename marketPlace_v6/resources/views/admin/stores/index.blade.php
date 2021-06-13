@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('content')
+@if (!$store)
+
+
 <a href="{{route('admin.stores.create')}}" class="btn btn-lg btn-success">Criar Loja</a>
+@endif
 <table class="table table-striped">
     <thead>
         <tr>
@@ -10,14 +14,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($stores as $item)
+
                 <tr>
-                    <td>{{$item->id}}</td>
-                    <td>{{$item->name}}</td>
+                    <td>{{$store->id}}</td>
+                    <td>{{$store->name}}</td>
                     <td>
                         <div class="btn-group">
-                               <a href="{{route('admin.stores.edit',['store'=>$item->id])}}" class="btn btn-sm btn-primary">Editar</a>
-                        <form action="{{route('admin.stores.destroy',['store'=>$item->id])}}" method="post">
+                               <a href="{{route('admin.stores.edit',['store'=>$store->id])}}" class="btn btn-sm btn-primary">Editar</a>
+                        <form action="{{route('admin.stores.destroy',['store'=>$store->id])}}" method="post">
                             {{ csrf_field() }}
                             @method("DELETE")
                             <button type="submit" onclick="return confirm('deseja deletar?')" class="btn btn-sm btn-danger">Deletar</button>
@@ -25,7 +29,6 @@
                         </div>
                     </td>
                 </tr>
-        @endforeach
     </tbody>
 </table>
 

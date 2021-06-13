@@ -9,17 +9,24 @@ class StoreController extends Controller
 {
     public function index()
     {
-        $stores = \App\Models\Store::paginate(10);
-        return view('admin.stores.index',compact('stores'));
+        $store = auth()->user()->store;
+        //dd();
+        return view('admin.stores.index',compact('store'));
     }
     public function create(/*Request $input*/)
     {
+        if( $store = auth()->user()->store()->count())
+        {
+            flash('Você ja possui uma loja')->warning();
+            return redirect()->route('admin.stores.index');
+        }
         $users = \App\Models\User::all(['id','name']);
         return view('admin.stores.create',compact('users'));
     }
 
     public function store(StoreRequest $input)
     {
+        
         $dados = $input->all();
         auth()->user();
         $user =auth()->user();
