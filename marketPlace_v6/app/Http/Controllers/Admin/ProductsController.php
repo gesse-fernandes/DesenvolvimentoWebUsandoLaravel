@@ -23,7 +23,8 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = $this->product->paginate(10);
+        $userStore = auth()->user()->store;
+        $products = $userStore->products()->paginate(10);
         return view('admin.products.index',compact('products'));
     }
 
@@ -34,8 +35,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $stores = \App\Models\Store::all('id','name');
-        return view('admin.products.create',compact('stores'));
+       // $stores = \App\Models\Store::all('id','name');
+       $categories = \App\Models\Category::all(['id','name']);
+        return view('admin.products.create',compact('categories'));
     }
 
     /**
@@ -47,10 +49,11 @@ class ProductsController extends Controller
     public function store(ProductRequest $request)
     {
        $dados = $request->all();
-       $store = \App\Models\Store::find($dados['store']);
+       //$store = \App\Models\Store::find($dados['store']);
+        $store = auth()->user()->store;
 
-       $store->products()->create($dados);
-
+       $product= $store->products()->create($dados);
+        $product->categories()->sync($dados['categories']);
        flash('Produto Criado com sucesso')->success();
        return redirect()->route('admin.products.index');
     }
@@ -74,8 +77,9 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
+        $categories = \App\Models\Category::all(['id', 'name']);
         $product = $this->product->findOrFail($id);
-        return view('admin.products.edit', compact('product'));
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -90,6 +94,7 @@ class ProductsController extends Controller
         $dados = $request->all();
         $prod = $this->product->find($id);
         $prod->update($dados);
+        $prod->categories()->sync($dados['categories']);
         flash('Produto Atualizado com sucesso')->warning();
         return redirect()->route('admin.products.index');
     }
