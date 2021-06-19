@@ -46,6 +46,7 @@ class CategoryController extends Controller
     {
         $dados = $request->all();
         //dd($dados);
+    
         $category = $this->category->create($dados);
         flash('Categoria Criada com Sucesso')->success();
         return redirect()->route('admin.categories.index');

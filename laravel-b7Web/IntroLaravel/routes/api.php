@@ -17,12 +17,3 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
-Route::get('/categoria',function(){
-    return App\Models\Category::all();
-});
-
-Route::get('/loja',function(){
-    return \App\Models\Store::all();
-});
