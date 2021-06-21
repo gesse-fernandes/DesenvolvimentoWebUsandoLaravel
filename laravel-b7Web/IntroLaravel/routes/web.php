@@ -13,21 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController');
 
 
 Route::prefix('/config')->group(function(){
-    Route::get('/',function(){
-        return view('config');
-    });
-    Route::get('info',function(){
-        echo "Configurações INFO 2";
-    });
-    Route::get('permissoes',function(){
-        echo "Configuracoes permissoes 2";
-    });
+    Route::get('/','ConfigController@index');
+    Route::get('info','ConfigController@info');
+    Route::get('permissoes','ConfigController@permissoes');
 });
 
 Route::fallback(function(){
