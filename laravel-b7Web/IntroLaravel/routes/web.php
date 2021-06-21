@@ -17,9 +17,9 @@ Route::get('/', 'HomeController');
 
 
 Route::prefix('/config')->group(function(){
-    Route::get('/','ConfigController@index');
-    Route::get('info','ConfigController@info');
-    Route::get('permissoes','ConfigController@permissoes');
+    Route::get('/','Admin\ConfigController@index');
+    Route::get('info','Admin\ConfigController@info');
+    Route::get('permissoes','Admin\ConfigController@permissoes');
 });
 
 Route::fallback(function(){
@@ -38,3 +38,7 @@ Route::get('/config/info',function(){
 Route::get('config/permissoes',function(){
     return "configuracoes permission";
 })->name('permissoes');*/
+
+//Auth::routes();
+
+
