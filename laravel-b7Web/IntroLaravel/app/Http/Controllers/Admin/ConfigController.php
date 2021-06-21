@@ -7,8 +7,14 @@ use Illuminate\Http\Request;
 
 class ConfigController extends Controller
 {
-    public function index()
+    public function index(Request $re)
     {
+        $url = $re->url();
+        //echo $url;
+        $method = $re->method();
+        //echo $method;
+        $data = $re->all();
+
         return view('config');
     }
 

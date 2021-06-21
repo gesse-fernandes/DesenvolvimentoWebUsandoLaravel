@@ -18,6 +18,7 @@ Route::get('/', 'HomeController');
 
 Route::prefix('/config')->group(function(){
     Route::get('/','Admin\ConfigController@index');
+    Route::post('/','Admin\ConfigController@index');
     Route::get('info','Admin\ConfigController@info');
     Route::get('permissoes','Admin\ConfigController@permissoes');
 });
