@@ -26,6 +26,20 @@ Route::prefix('/config')->group(function(){
 Route::fallback(function(){
     return view('404');
 });
+Route::prefix('/tarefas')->group(function(){
+    Route::get('/','TarefasController@list')->name('tarefas.list');
+
+    Route::get('add', 'TarefasController@add')->name('tarefas.add');
+    Route::post('add', 'TarefasController@addAction');
+
+    Route::get('edit/{id}', 'TarefasController@edit')->name('tarefas.edit');
+    Route::post('edit/{id}', 'TarefasController@editAction');
+
+    Route::get('delete/{id}', 'TarefasController@del')->name('tarefas.del');
+
+    Route::get('marcar/{id}', 'TarefasController@done')->name('tarefas.done');
+
+});
 /*
 Route::get('/config',function(){
     $link = route('info');

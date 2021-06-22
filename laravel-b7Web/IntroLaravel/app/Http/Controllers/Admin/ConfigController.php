@@ -14,8 +14,11 @@ class ConfigController extends Controller
         $method = $re->method();
         //echo $method;
         $data = $re->all();
-
-        return view('config');
+        $dados = [
+            'nome'=> 'Gesse ',
+            'idade'=>'90'
+        ];
+        return view('admin.config',$dados);
     }
 
     public function info()
