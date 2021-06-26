@@ -40,6 +40,7 @@ Route::prefix('/tarefas')->group(function(){
     Route::get('marcar/{id}', 'TarefasController@done')->name('tarefas.done');
 
 });
+
 /*
 Route::get('/config',function(){
     $link = route('info');

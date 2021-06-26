@@ -3,9 +3,11 @@
 
 @section('content')
  <h1>Ação Cadastrar</h1>
- @if (session('warning'))
-    {{session('warning')}}
- @endif
+@if ($errors->any())
+    @foreach ($errors->all() as $error )
+        {{$error}}</br>
+    @endforeach
+@endif
  <form  method="post">
      @csrf
     <label for="">
