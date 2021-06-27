@@ -21,3 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/ping',function(){
     return ['pong' => true,'request'=>'deu bom'];
 });*/
+
+Route::resource('/notes','NotesController');
+
