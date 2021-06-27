@@ -6,7 +6,7 @@
 Meu nome é {{$nome}}
 </br>
 <a href="/config/info">info</a>
-
+<a href="/logout">Sair</a>
 <form action="" method="post">
     @csrf
     Nome:<br>
