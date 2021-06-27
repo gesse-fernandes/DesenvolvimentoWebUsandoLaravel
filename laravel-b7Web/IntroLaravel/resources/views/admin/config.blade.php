@@ -7,6 +7,11 @@ Meu nome é {{$nome}}
 </br>
 <a href="/config/info">info</a>
 <a href="/logout">Sair</a>
+
+@if ($showform)
+
+
+
 <form action="" method="post">
     @csrf
     Nome:<br>
@@ -15,5 +20,6 @@ Meu nome é {{$nome}}
     <input type="text" name="age" id=""></br>
     <input type="submit" value="Enviar!">
 </form>
+@endif
 @endsection
 
