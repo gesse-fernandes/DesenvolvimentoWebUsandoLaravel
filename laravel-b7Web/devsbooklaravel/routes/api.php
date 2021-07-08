@@ -18,7 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('/funcionario','FuncionarioController');
-
-
-
+Route::get('/pong',function(){
+    return ['ping'=>true];
+});
