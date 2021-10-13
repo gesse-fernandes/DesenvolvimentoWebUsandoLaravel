@@ -15,4 +15,13 @@ class Category extends Model
     {
         return $this->belongsToMany(Product::class);
     }
+
+    public static $rules = [
+        'name'=>'required',
+    ];
+
+    public static $messages = [
+        'name.required'=>'Nome da categoria Obrigatorio',
+
+    ];
 }

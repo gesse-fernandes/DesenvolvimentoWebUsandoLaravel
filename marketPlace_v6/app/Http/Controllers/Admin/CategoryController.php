@@ -46,7 +46,7 @@ class CategoryController extends Controller
     {
         $dados = $request->all();
         //dd($dados);
-    
+
         $category = $this->category->create($dados);
         flash('Categoria Criada com Sucesso')->success();
         return redirect()->route('admin.categories.index');
@@ -82,11 +82,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $dados = $request->all();
+        $validateData = $request->validate(['name' => 'required'
+        ],[
+            'name.required' => 'Nome da categoria Obrigatorio',
+
+        ]);
         $category = $this->category->findOrFail($id);
-        $category->update($dados);
+        $category->update($validateData);
         flash('Categoria Atualizado com sucesso')->warning();
         return redirect()->route('admin.categories.index');
     }

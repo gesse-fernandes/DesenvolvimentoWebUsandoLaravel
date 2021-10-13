@@ -7,12 +7,24 @@
     <div class="form-group">
     <label for="">Nome do Produto</label>
     <br>
-    <input type="text" class="form-control" value="{{$category->name}}" name="name">
+    <input type="text" class="form-control {{$errors->has('name')?'is-invalid':''}}" value="{{$category->name}}" name="name">
+    @if ($errors->has('name'))
+        <div class="invalid-feedback">
+            {{$errors->first('name')}}
+        </div>
+
+    @endif
 </div>
 <div class="form-group">
     <label for="">Descrição</label>
     <br>
-    <input type="text" class="form-control" value="{{$category->description}}" name="description">
+    <input type="text" class="form-control {{$errors->has('description')?'is-invalid':''}}" value="{{$category->description}}" name="description">
+     @if ($errors->has('description'))
+    <div class="invalid-feedback">
+        {{$errors->first('description')}}
+    </div>
+
+    @endif
 </div>
 <div class="form-group">
     <label for="">Slug</label>
