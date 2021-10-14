@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRequest;
+use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\Storage;
+
 class StoreController extends Controller
 {
+    use UploadTrait;
     public function __construct()
     {
         $this->middleware('user.has.store')->only(['create','store']);
@@ -24,16 +28,19 @@ class StoreController extends Controller
         return view('admin.stores.create',compact('users'));
     }
 
-    public function store(StoreRequest $input)
+    public function store(StoreRequest $request)
     {
+        $data = $request->all();
+        $user = auth()->user();
 
-        $dados = $input->all();
-        auth()->user();
-        $user =auth()->user();
-        $stores=$user->store()->create($dados);
-        flash('Loja Criada com sucesso')->success();
-        return redirect()->route('admin.stores.index');
+        if ($request->hasFile('logo')) {
+            $data['logo'] = $this->imageUpload($request->file('logo'));
+        }
 
+        $store = $user->store()->create($data);
+
+        flash("A loja foi criada com sucesso.")->success();
+        return redirect()->route("admin.stores.index");
     }
 
     public function edit($store)
@@ -41,14 +48,22 @@ class StoreController extends Controller
         $store = \App\Models\Store::find($store);
         return view('admin.stores.edit',compact('store'));
     }
-    public function update(StoreRequest $input,$store)
+    public function update(StoreRequest $request, $store)
     {
-       // dd($input->all());
-       $dados = $input->all();
-       $store = \App\Models\Store::find($store);
-       $store->update($dados);
-       flash('Loja Atualizada com sucesso')->warning();
-       return redirect()->route('admin.stores.index');
+        $data = $request->all();
+        $store = \App\Models\Store::find($store);
+
+        if ($request->hasFile('logo')) {
+            if (Storage::disk('public')->exists($store->logo)) {
+                Storage::disk('public')->delete($store->logo);
+            }
+            $data['logo'] = $this->imageUpload($request->file('logo'));
+        }
+
+        $store->update($data);
+
+        flash("A loja foi atualizada com sucesso.")->success();
+        return redirect()->route("admin.stores.index");
     }
     public function destroy($store)
     {

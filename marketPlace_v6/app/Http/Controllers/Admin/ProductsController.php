@@ -7,9 +7,10 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-
+use App\Traits\UploadTrait;
 class ProductsController extends Controller
 {
+     use UploadTrait;
     private $product;
 
     public function __construct(Product $product)
@@ -25,6 +26,7 @@ class ProductsController extends Controller
     {
         $userStore = auth()->user()->store;
         $products = $userStore->products()->paginate(10);
+
         return view('admin.products.index',compact('products'));
     }
 
@@ -48,12 +50,19 @@ class ProductsController extends Controller
      */
     public function store(ProductRequest $request)
     {
+
        $dados = $request->all();
        //$store = \App\Models\Store::find($dados['store']);
         $store = auth()->user()->store;
 
        $product= $store->products()->create($dados);
         $product->categories()->sync($dados['categories']);
+        if($request->hasFile('photos'))
+        {
+            $images = $this->imageUpload($request->file('photos'),'image');
+            //Inserção na base
+            $product->photos()->createMany($images);
+        }
        flash('Produto Criado com sucesso')->success();
        return redirect()->route('admin.products.index');
     }
@@ -95,6 +104,11 @@ class ProductsController extends Controller
         $prod = $this->product->find($id);
         $prod->update($dados);
         $prod->categories()->sync($dados['categories']);
+        if ($request->hasFile('photos')) {
+            $images = $this->imageUpload($request->file('photos'), 'image');
+            //Inserção na base
+            $prod->photos()->createMany($images);
+        }
         flash('Produto Atualizado com sucesso')->warning();
         return redirect()->route('admin.products.index');
     }
@@ -112,5 +126,6 @@ class ProductsController extends Controller
         flash('Produto Removido com sucesso')->success();
         return redirect()->route('admin.products.index');
     }
+
     }
 

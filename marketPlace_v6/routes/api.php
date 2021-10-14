@@ -26,3 +26,5 @@ Route::get('/categoria',function(){
 Route::get('/loja',function(){
     return \App\Models\Store::all();
 });
+
+

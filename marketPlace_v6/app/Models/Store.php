@@ -9,7 +9,7 @@ class Store extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name','description','phone','mobile_phone','slug',
+        'name','description','phone','mobile_phone','slug','logo',
     ];
 
 
@@ -26,7 +26,8 @@ class Store extends Model
         'name' => 'required',
         'description'=> 'required|min:10',
         'phone' => 'required',
-        'mobile_phone' => 'required'
+        'mobile_phone' => 'required',
+        'logo'=>'image',
     ];
 
     public static $messages =[
@@ -35,5 +36,6 @@ class Store extends Model
         'description.min'=>'Tamanho maximo 10',
         'phone.required'=>'Telefone Obrigatório',
         'mobile_phone.required'=>'Celular Whattzap Obrigatório',
+        'image' => 'o Arquivo não é uma imagem valida'
     ];
 }

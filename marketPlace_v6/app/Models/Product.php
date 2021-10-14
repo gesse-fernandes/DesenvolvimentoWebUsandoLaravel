@@ -31,7 +31,8 @@ class Product extends Model
         'name' => 'required',
         'description' => 'required',
         'body' => 'required',
-        'price' => 'required'
+        'price' => 'required',
+        'photos'=>'image'
     ];
 
     public static $messages =
@@ -40,5 +41,11 @@ class Product extends Model
         'description.required'=>'Descrição Obrigatório',
         'body.required'=>'Campo Obrigatório',
         'price.required'=>'Preço Obrigatório',
+        'image'=>'o Arquivo não é uma imagem valida'
     ];
+
+    public function photos()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
 }
