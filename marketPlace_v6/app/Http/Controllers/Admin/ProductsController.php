@@ -53,10 +53,11 @@ class ProductsController extends Controller
 
        $dados = $request->all();
        //$store = \App\Models\Store::find($dados['store']);
+       $categories = $request->get('categories',null);
         $store = auth()->user()->store;
 
        $product= $store->products()->create($dados);
-        $product->categories()->sync($dados['categories']);
+        $product->categories()->sync($categories);
         if($request->hasFile('photos'))
         {
             $images = $this->imageUpload($request->file('photos'),'image');
@@ -101,9 +102,12 @@ class ProductsController extends Controller
     public function update(ProductRequest $request, $id)
     {
         $dados = $request->all();
+        $categories = $request->get('categories', null);
         $prod = $this->product->find($id);
         $prod->update($dados);
-        $prod->categories()->sync($dados['categories']);
+        if (!is_null($categories)) {
+            $prod->categories()->sync($categories);
+        }
         if ($request->hasFile('photos')) {
             $images = $this->imageUpload($request->file('photos'), 'image');
             //Inserção na base

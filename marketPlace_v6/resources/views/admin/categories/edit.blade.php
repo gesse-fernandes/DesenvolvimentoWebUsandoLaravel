@@ -26,12 +26,6 @@
 
     @endif
 </div>
-<div class="form-group">
-    <label for="">Slug</label>
-    <br>
-    <input type="text" value="{{$category->slug}}" name="slug" class="form-control">
-</div>
-
 <br>
 <div>
     <button type="submit" class="btn btn-lg btn-success">Editar Categoria</button>
